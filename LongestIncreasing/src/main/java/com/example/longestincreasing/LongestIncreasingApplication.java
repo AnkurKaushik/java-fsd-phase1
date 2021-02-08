@@ -19,8 +19,35 @@ public class LongestIncreasingApplication {
 		return list;
 	}
 
+	//finds longest consecutive subsequence in an arraylist
+	private static int longestConsecutiveSubsequence(ArrayList<Integer> inputArry)
+	{
+		//max is the absolute max, len is the current max value from the index
+		int max = 1;
+		int len = 1;
+		//loops through the array, checks to see if the values are strictly increasing and updates len
+		for(int i = 0; i < inputArry.size()-1; i++)
+		{
+			//values are increasing
+			if(inputArry.get(i+1) > inputArry.get(i))
+			{
+				//increment len, updates max if necessary
+				if(len+1 > max)
+					max = len+1;
+				len++;
+			}
+			//values are not increasing, reset len
+			else len = 1;
+		}
+		//check if final length is larger than max
+		if(len > max)
+			max = len;
+		return max;
+	}
+
 	//code to return the longest subsequence
-	private static int LongestSubsequence(ArrayList<Integer> inputArry)
+	//PROBLEM DEFINITION CHANGED TO LONGEST CONTIGUOUS SUBSEQUENCE, THIS SOLVES FOR LONGEST DISJOINT SUBSEQUENCE
+	/*private static int LongestSubsequence(ArrayList<Integer> inputArry)
 	{
 		//holds value of current longest lengths starting at each index
 		ArrayList<Integer> temp = new ArrayList<>();
@@ -47,26 +74,22 @@ public class LongestIncreasingApplication {
 				max = len;
 		}
 		return max;
-	}
+	}*/
 
 	public static void main(String[] args) {
-		//checks for random array of length 100
+		/*//checks for random array of length 100
 		ArrayList<Integer> l = createRandArry();
 		System.out.println(l);
-		System.out.println(LongestSubsequence(l));
+		System.out.println(LongestSubsequence(l));*/
 
-		//test case from online, result should be 6
-		int[] ary={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15};
+		//first test case, should be 3
+		int[] nums = {1,3,5,4,7};
 		ArrayList<Integer> al = new ArrayList<>();
-		for(int i : ary)
-			al.add(i);
-		System.out.println(LongestSubsequence(al));
-
-		//2nd test case result should be 4
-		int[] nums = {0,1,0,3,2,3};
-		al.clear();
 		for(int i : nums)
 			al.add(i);
-		System.out.println(LongestSubsequence(al));
+
+		System.out.println(longestConsecutiveSubsequence(al));
+
+		
 	}
 }
