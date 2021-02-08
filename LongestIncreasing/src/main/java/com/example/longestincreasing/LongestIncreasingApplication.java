@@ -25,6 +25,8 @@ public class LongestIncreasingApplication {
 		//max is the absolute max, len is the current max value from the index
 		int max = 1;
 		int len = 1;
+		//index of start of max subsequence
+		int indexMax = 0;
 		//loops through the array, checks to see if the values are strictly increasing and updates len
 		for(int i = 0; i < inputArry.size()-1; i++)
 		{
@@ -33,15 +35,27 @@ public class LongestIncreasingApplication {
 			{
 				//increment len, updates max if necessary
 				if(len+1 > max)
-					max = len+1;
+				{
+					//sets value of start of max index
+					indexMax = i-len+1;
+					max = len + 1;
+				}
 				len++;
 			}
 			//values are not increasing, reset len
-			else len = 1;
+			else
+			{
+				len = 1;
+
+			}
 		}
 		//check if final length is larger than max
 		if(len > max)
 			max = len;
+
+		//creates and prints a sublist starting from max index and ending at the index + value of max
+		//the math.min statement ensures that it does not exceed the size of the input array
+		System.out.println("Longest Consecutive Increasing Subsequence: " + inputArry.subList(indexMax,Math.min(indexMax+max,inputArry.size()-1)));
 		return max;
 	}
 
@@ -100,7 +114,7 @@ public class LongestIncreasingApplication {
 		System.out.println(al);
 		System.out.println(longestConsecutiveSubsequence(al));
 
-		//next test case, should be 5
+		//next test case, should be 3
 		int[] nums3 = {8,7,6,5,4,2,3,8,4};
 		al.clear();
 		for(int i : nums3)
@@ -108,5 +122,10 @@ public class LongestIncreasingApplication {
 
 		System.out.println(al);
 		System.out.println(longestConsecutiveSubsequence(al));
+
+		al.clear();
+		al = createRandArry();
+		System.out.println("Array: " + al);
+		System.out.println("Length of longest consecutive subsequence: " + longestConsecutiveSubsequence(al));
 	}
 }
