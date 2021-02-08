@@ -88,8 +88,25 @@ public class LongestIncreasingApplication {
 		for(int i : nums)
 			al.add(i);
 
+		System.out.println(al);
 		System.out.println(longestConsecutiveSubsequence(al));
 
-		
+		//next test case, should be 5
+		int[] nums2 = {1,5,6,2,4,7,9,11,0};
+		al.clear();
+		for(int i : nums2)
+			al.add(i);
+
+		System.out.println(al);
+		System.out.println(longestConsecutiveSubsequence(al));
+
+		//next test case, should be 5
+		int[] nums3 = {8,7,6,5,4,2,3,8,4};
+		al.clear();
+		for(int i : nums3)
+			al.add(i);
+
+		System.out.println(al);
+		System.out.println(longestConsecutiveSubsequence(al));
 	}
 }
